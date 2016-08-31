@@ -1,0 +1,14 @@
+-= Ideas =-
+Emotions index, impacted by events (mad, glad, sad, fear, disgust).  Impacts stats.  Too many runs, raises fear.  
+Built in screen reader function.
+Touch screen support.
+
+
+-= Design =-
+Everything in SQL, if possible
+Scripting/Events table, has EventSetId, EventId => FK to EventOptions Table for each EventId
+Naming Template for Randomized Objects: {BrandName} {Condition} {Substance} {Color} {BaseItem} {Modifier (+1, etc.)}
+Sorting/Filtering by BaseItem, item type
+Stacking Items
+Hot Keys for most commonly used keystrokes
+Common roguelike keys?
