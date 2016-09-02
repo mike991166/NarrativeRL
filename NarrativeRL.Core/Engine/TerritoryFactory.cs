@@ -30,7 +30,7 @@ namespace NarrativeRL.Core.Engine
             isInitialized = true;
         }
 
-        public static Territory GetNewTerritory(IRandom rand)
+        public static Territory GetTerritory(IRandom rand)
         {
             if (!isInitialized)
             {
@@ -44,6 +44,33 @@ namespace NarrativeRL.Core.Engine
             t.TerrainType = terrains.ElementAt(rand.Next(terrains.Count - 1));
 
             return t;
+        }
+
+        public static List<Territory> GetTerritoryList(IRandom rand, int minCount, int maxCount)
+        {
+            List<Territory> territoryList = null;
+
+            if (!isInitialized)
+            {
+                throw new Exception("Data not initialized.  Please call Initialize() first.");
+            }
+            else
+            {
+                Territory t; 
+                int territoryCount = rand.Next(minCount, maxCount);
+                territoryList = new List<Territory>();
+
+                for (int i = 0; i < territoryCount; i++)
+                {
+                    t = new Territory();
+                    t.LocationPrefixType = locationPrefixes.ElementAt(rand.Next(locationPrefixes.Count - 1));
+                    t.ZoneType = zones.ElementAt(rand.Next(zones.Count - 1));
+                    t.TerrainType = terrains.ElementAt(rand.Next(terrains.Count - 1));
+                    territoryList.Add(t);
+                }
+            }
+
+            return territoryList;
         }
 
     }

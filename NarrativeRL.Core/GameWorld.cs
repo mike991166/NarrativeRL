@@ -19,12 +19,14 @@ namespace NarrativeRL.Core
     public static class GameWorld
     {
         private static Stack<IConsole> ConsoleStack;
-
         public static SimpleInputConsole InputConsole;
-
-        public static MainMenuConsole MainMenu;
+        public static MenuConsole Menu;
 
         public static IRandom Random { get; private set; }
+
+        public static List<Territory> TerritoryList;
+
+
 
         /// <summary>
         /// Called one time to initiate everything. Assumes SadConsole has been setup and is ready to go.
@@ -56,20 +58,69 @@ namespace NarrativeRL.Core
 
             menuItems.Add(new MenuItem("[ MAIN MENU ]"));
 
+            menuItems.Add(new MenuItem("New Game", (sender, e) =>
+            {
+                NewGameSelected();
+            }));
+
             menuItems.Add(new MenuItem("Exit Game", (sender, e) =>
             {
                 ExitSelected();
             }));
 
-            MainMenu = new MainMenuConsole(80, 25, menuItems);
-            SadConsole.Engine.ActiveConsole = MainMenu;
-            SadConsole.Engine.ConsoleRenderStack.Add(MainMenu);
+            
 
+            Menu = new MenuConsole(80, 25, menuItems);
+            SadConsole.Engine.ActiveConsole = Menu;
+            SadConsole.Engine.ConsoleRenderStack.Add(Menu);
+
+        }
+
+        public static void NewGameSelected()
+        {
+            // clear existing menu        
+            SadConsole.Engine.ConsoleRenderStack.Clear();
+
+            // get list of territories
+            TerritoryList = TerritoryFactory.GetTerritoryList(Random, 3, 9);
+
+            // build territory menu items
+            string territoryString;
+            Territory t;
+
+            List<MenuItem> menuItems = new List<MenuItem>();
+            menuItems.Add(new MenuItem("[ SELECT A TERRITORY TO EXPLORE ]"));
+
+            menuItems.Add(new MenuItem("Get More Territories", (sender, e) =>
+            {
+                NewGameSelected();
+            }));
+
+            for (int i = 0; i < TerritoryList.Count; i++)
+            {
+                t = TerritoryList.ElementAt(i);
+                territoryString = String.Format("{0} {1} [{2}]", t.LocationPrefixType.Name, t.ZoneType.Name, t.TerrainType.Name);
+
+                menuItems.Add(new MenuItem(territoryString, (sender, e) =>
+                {
+                    TerritorySelected(i);
+                }));
+            }
+
+            // add to menu
+            Menu = new MenuConsole(80, 25, menuItems);
+            SadConsole.Engine.ActiveConsole = Menu;
+            SadConsole.Engine.ConsoleRenderStack.Add(Menu);
+        }
+
+        public static void TerritorySelected(int SelectedTerritory)
+        {
+            int x = 1;
         }
 
         public static void ExitSelected()
         {
-            int x = 1;
+            Environment.Exit(0);
         }
 
         private static void InitializeData()

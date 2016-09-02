@@ -19,7 +19,7 @@ namespace NarrativeRL.Core.Console
 
             for (int i = 0; i < NumberOfTerritories; i++)
             {
-                t = TerritoryFactory.GetNewTerritory(Rng);
+                t = TerritoryFactory.GetTerritory(Rng);
                 this.Print(2, (baseHeight + (i * 2)), String.Format("{0} {1} [{2}]", t.LocationPrefixType.Name, t.ZoneType.Name, t.TerrainType.Name));
             }
         }

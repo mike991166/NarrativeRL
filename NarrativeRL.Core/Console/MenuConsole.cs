@@ -10,11 +10,11 @@ using NarrativeRL.Core.UserInterface;
 
 namespace NarrativeRL.Core.Console
 {
-    public class MainMenuConsole: SadConsole.Consoles.Console
+    public class MenuConsole: SadConsole.Consoles.Console
     {
         private List<MenuItem> MenuItems;
 
-        public MainMenuConsole(int width, int height, List<MenuItem> items) : base(width, height)
+        public MenuConsole(int width, int height, List<MenuItem> items) : base(width, height)
         {
             this.MenuItems = items;
             this.CanUseKeyboard = true;

@@ -45,7 +45,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Console\ConsoleConstants.cs" />
-    <Compile Include="Console\MainMenuConsole.cs" />
+    <Compile Include="Console\MenuConsole.cs" />
     <Compile Include="Console\OverworldConsole.cs" />
     <Compile Include="Console\SimpleInputConsole.cs" />
     <Compile Include="Data\BaseList.cs" />
@@ -132,7 +132,9 @@
     <None Include="C64.font">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Cheepicus12.font" />
+    <None Include="Cheepicus12.font">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Content\Rexpaint\InputFrame.xp">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
