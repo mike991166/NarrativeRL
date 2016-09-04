@@ -30,6 +30,7 @@ using Microsoft.Xna.Framework;
 using NarrativeRL.Core.Data;
 
 using SQLite;
+using NarrativeRL.Core.Console;
 
 namespace NarrativeRL.Core
 {
@@ -48,7 +49,8 @@ namespace NarrativeRL.Core
 
             // Setup the engine and creat the main window.
             //SadConsole.Engine.Initialize("IBM.font", 80, 25);
-            SadConsole.Engine.Initialize("C64.font", 80, 25);
+            //SadConsole.Engine.Initialize("CGA8x8thick.font", 80, 60);
+            SadConsole.Engine.Initialize("IBM.font", ConsoleConstants.TotalWidth, ConsoleConstants.TotalHeight);
 
             // Hook the start event so we can add consoles to the system.
             SadConsole.Engine.EngineStart += Engine_EngineStart;

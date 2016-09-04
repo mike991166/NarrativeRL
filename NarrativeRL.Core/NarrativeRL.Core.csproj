@@ -44,7 +44,11 @@
     <StartupObject>NarrativeRL.Core.Program</StartupObject>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Console\BorderedConsole.cs" />
     <Compile Include="Console\ConsoleConstants.cs" />
+    <Compile Include="Console\ExplorationHeaderConsole.cs" />
+    <Compile Include="Console\ExplorationMainConsole.cs" />
+    <Compile Include="Console\ExplorationScreen.cs" />
     <Compile Include="Console\MenuConsole.cs" />
     <Compile Include="Console\OverworldConsole.cs" />
     <Compile Include="Console\SimpleInputConsole.cs" />
@@ -110,6 +114,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="CGA8x8thick.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Cheepicus_12x12.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -130,6 +137,9 @@
   <ItemGroup>
     <None Include="app.config" />
     <None Include="C64.font">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="CGA8x8thick.font">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Cheepicus12.font">

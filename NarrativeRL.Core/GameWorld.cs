@@ -54,9 +54,11 @@ namespace NarrativeRL.Core
 
         private static void DisplayMainMenu()
         {
+            string title, introduction;
             List<MenuItem> menuItems = new List<MenuItem>();
 
-            menuItems.Add(new MenuItem("[ MAIN MENU ]"));
+            title = "[ MAIN MENU ]";
+            introduction = "<CATCH PHRASE>";
 
             menuItems.Add(new MenuItem("New Game", (sender, e) =>
             {
@@ -67,10 +69,9 @@ namespace NarrativeRL.Core
             {
                 ExitSelected();
             }));
-
             
-
-            Menu = new MenuConsole(80, 25, menuItems);
+            Menu = new MenuConsole(ConsoleConstants.TotalWidth, ConsoleConstants.TotalHeight, 
+                title, introduction, menuItems);
             SadConsole.Engine.ActiveConsole = Menu;
             SadConsole.Engine.ConsoleRenderStack.Add(Menu);
 
@@ -78,8 +79,13 @@ namespace NarrativeRL.Core
 
         public static void NewGameSelected()
         {
+            string title, introduction;
+
             // clear existing menu        
             SadConsole.Engine.ConsoleRenderStack.Clear();
+
+            title = "[ SELECT A TERRITORY TO EXPLORE ]";
+            introduction = String.Empty;
 
             // get list of territories
             TerritoryList = TerritoryFactory.GetTerritoryList(Random, 3, 9);
@@ -89,7 +95,6 @@ namespace NarrativeRL.Core
             Territory t;
 
             List<MenuItem> menuItems = new List<MenuItem>();
-            menuItems.Add(new MenuItem("[ SELECT A TERRITORY TO EXPLORE ]"));
 
             menuItems.Add(new MenuItem("Get More Territories", (sender, e) =>
             {
@@ -108,14 +113,16 @@ namespace NarrativeRL.Core
             }
 
             // add to menu
-            Menu = new MenuConsole(80, 25, menuItems);
+            Menu = new MenuConsole(ConsoleConstants.TotalWidth, ConsoleConstants.TotalHeight, title, introduction, menuItems);
             SadConsole.Engine.ActiveConsole = Menu;
             SadConsole.Engine.ConsoleRenderStack.Add(Menu);
         }
 
         public static void TerritorySelected(int SelectedTerritory)
         {
-            int x = 1;
+            ExplorationScreen ExploreScreen = new ExplorationScreen();
+            SadConsole.Engine.ConsoleRenderStack.Clear();
+            SadConsole.Engine.ConsoleRenderStack.Add(ExploreScreen);
         }
 
         public static void ExitSelected()
