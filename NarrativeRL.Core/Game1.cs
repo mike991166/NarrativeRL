@@ -1,7 +1,9 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System.Text;
 
+using NarrativeRL.Core.Console;
 using NarrativeRL.Core.Data;
 using NarrativeRL.Core.Engine;
 
@@ -17,10 +19,16 @@ namespace NarrativeRL.Core
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
+        GameTime LastInputProcessedTime;
+        StringBuilder InputKeys;
+
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
-            Content.RootDirectory = "Content";           
+            Content.RootDirectory = "Content";
+
+            LastInputProcessedTime = new GameTime();
+            InputKeys = new StringBuilder();
         }
 
         /// <summary>
@@ -35,15 +43,21 @@ namespace NarrativeRL.Core
 
             #region SadConsole
 
-            var sadConsoleComponent = new SadConsole.EngineGameComponent(this, graphics, "IBM.font", 80, 25, () =>
-            {
-                SadConsole.Engine.UseMouse = true;
-                SadConsole.Engine.UseKeyboard = true;
+            var sadConsoleComponent = new SadConsole.EngineGameComponent(this, graphics, "IBM.font", 
+                ConsoleConstants.TotalWidth, ConsoleConstants.TotalHeight, 
+                () =>
+                    {
+                        SadConsole.Engine.UseMouse = true;
+                        SadConsole.Engine.UseKeyboard = true;
 
-                //var sampleConsole = new SadConsole.Consoles.Console(80, 60);
-                //sampleConsole.FillWithRandomGarbage();
+                        var sampleConsole = new SadConsole.Consoles.Console(80, 60);
+                        //sampleConsole.FillWithRandomGarbage();
 
-            });
+                        SadConsole.Engine.ConsoleRenderStack.Clear();
+                        SadConsole.Engine.ConsoleRenderStack.Add(sampleConsole);
+                        SadConsole.Engine.ActiveConsole = sampleConsole;
+
+                    });
 
             Components.Add(sadConsoleComponent);
 
@@ -54,14 +68,13 @@ namespace NarrativeRL.Core
 
             #region SQLite
 
-            //var db = new SQLiteConnection(@".\Database\nrl_db.sqlite");
-            //var itemList = db.Table<Item>();
-
-
+            var db = new SQLiteConnection(@".\Database\nrl_db.sqlite");
 
             #endregion
 
             base.Initialize();
+
+            GameWorld.Start();
         }
 
         /// <summary>
@@ -71,7 +84,7 @@ namespace NarrativeRL.Core
         protected override void LoadContent()
         {
             // Create a new SpriteBatch, which can be used to draw textures.
-            spriteBatch = new SpriteBatch(GraphicsDevice);
+            //spriteBatch = new SpriteBatch(GraphicsDevice);
 
             // TODO: use this.Content to load your game content here
         }
@@ -97,6 +110,23 @@ namespace NarrativeRL.Core
 
             // TODO: Add your update logic here
 
+
+            // Process Received Input, waiting on Enter key
+            SadConsole.Input.KeyboardInfo keyInfo = SadConsole.Engine.Keyboard;
+
+            if (keyInfo.KeysReleased.Count > 0)
+            {
+                if (keyInfo.IsKeyReleased(Keys.Enter))
+                {
+                    string enteredString = this.InputKeys.ToString();
+                    this.InputKeys.Clear();
+                }
+                else
+                {
+                    this.InputKeys.Append(keyInfo.KeysReleased[0].Character);
+                }
+            }
+           
             base.Update(gameTime);
         }
 

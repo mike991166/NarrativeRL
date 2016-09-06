@@ -1,34 +1,35 @@
-﻿//using System;
+﻿using System;
 
-//namespace NarrativeRL.Core
-//{
-//#if WINDOWS || LINUX
-//    /// <summary>
-//    /// The main class.
-//    /// </summary>
-//    public static class Program
-//    {
-//        /// <summary>
-//        /// The main entry point for the application.
-//        /// </summary>
-//        [STAThread]
-//        static void Main()
-//        {
-//            using (var game = new Game1())
-//                game.Run();
+namespace NarrativeRL.Core
+{
+#if WINDOWS || LINUX
+    /// <summary>
+    /// The main class.
+    /// </summary>
+    public static class Program
+    {
+        /// <summary>
+        /// The main entry point for the application.
+        /// </summary>
+        [STAThread]
+        static void Main()
+        {
+            using (var game = new Game1())
+                game.Run();
 
-//        }
-//#endif
-//    }
-//}
+        }
+#endif
+    }
+}
 
+/*
 using System;
 using Console = SadConsole.Consoles.Console;
 using SadConsole.Consoles;
 using Microsoft.Xna.Framework;
 
 using NarrativeRL.Core.Data;
-
+using SadConsole;
 using SQLite;
 using NarrativeRL.Core.Console;
 
@@ -47,10 +48,10 @@ namespace NarrativeRL.Core
             // Initialize ECS
             Peanuts.Peanuts.Initialize();
 
-            // Setup the engine and creat the main window.
-            //SadConsole.Engine.Initialize("IBM.font", 80, 25);
-            //SadConsole.Engine.Initialize("CGA8x8thick.font", 80, 60);
+            // Setup the engine and create the main window.
             SadConsole.Engine.Initialize("IBM.font", ConsoleConstants.TotalWidth, ConsoleConstants.TotalHeight);
+            //SadConsole.Engine.Initialize("CGA8x8thick.font", ConsoleConstants.TotalWidth, ConsoleConstants.TotalHeight);
+            //SadConsole.Engine.Initialize("C64.font", ConsoleConstants.TotalWidth, ConsoleConstants.TotalHeight);
 
             // Hook the start event so we can add consoles to the system.
             SadConsole.Engine.EngineStart += Engine_EngineStart;
@@ -73,7 +74,11 @@ namespace NarrativeRL.Core
 
         private static void Engine_EngineUpdated(object sender, EventArgs e)
         {
-            int x = 1;
+            // get keys pressed
+            SadConsole.Input.KeyboardInfo key = SadConsole.Engine.Keyboard;
+
+            if (key.)
         }
     }
 }
+*/

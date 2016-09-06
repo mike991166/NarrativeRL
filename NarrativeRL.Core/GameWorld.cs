@@ -60,12 +60,12 @@ namespace NarrativeRL.Core
             title = "[ MAIN MENU ]";
             introduction = "<CATCH PHRASE>";
 
-            menuItems.Add(new MenuItem("New Game", (sender, e) =>
+            menuItems.Add(new MenuItem("New Game", 0, (sender, e) =>
             {
                 NewGameSelected();
             }));
 
-            menuItems.Add(new MenuItem("Exit Game", (sender, e) =>
+            menuItems.Add(new MenuItem("Exit Game", 1, (sender, e) =>
             {
                 ExitSelected();
             }));
@@ -96,7 +96,7 @@ namespace NarrativeRL.Core
 
             List<MenuItem> menuItems = new List<MenuItem>();
 
-            menuItems.Add(new MenuItem("Get More Territories", (sender, e) =>
+            menuItems.Add(new MenuItem("Get More Territories", 0, (sender, e) =>
             {
                 NewGameSelected();
             }));
@@ -106,9 +106,9 @@ namespace NarrativeRL.Core
                 t = TerritoryList.ElementAt(i);
                 territoryString = String.Format("{0} {1} [{2}]", t.LocationPrefixType.Name, t.ZoneType.Name, t.TerrainType.Name);
 
-                menuItems.Add(new MenuItem(territoryString, (sender, e) =>
+                menuItems.Add(new MenuItem(territoryString, i, (sender, e) =>
                 {
-                    TerritorySelected(i);
+                    TerritorySelected(e);
                 }));
             }
 
@@ -117,10 +117,12 @@ namespace NarrativeRL.Core
             SadConsole.Engine.ActiveConsole = Menu;
             SadConsole.Engine.ConsoleRenderStack.Add(Menu);
         }
-
+        
         public static void TerritorySelected(int SelectedTerritory)
         {
             ExplorationScreen ExploreScreen = new ExplorationScreen();
+            ExploreScreen.SetNext(TerritoryList[SelectedTerritory], "test narrative", null);
+
             SadConsole.Engine.ConsoleRenderStack.Clear();
             SadConsole.Engine.ConsoleRenderStack.Add(ExploreScreen);
         }

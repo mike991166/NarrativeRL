@@ -9,7 +9,7 @@ namespace NarrativeRL.Core.Console
     static class ConsoleConstants
     {
         public const int TotalWidth = 80;
-        public const int TotalHeight = 40;
+        public const int TotalHeight = 25;
 
         public const string RexPaintFilePath = @".\Content\rexpaint\";
     }

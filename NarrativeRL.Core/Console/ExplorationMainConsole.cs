@@ -12,8 +12,8 @@ namespace NarrativeRL.Core.Console
 {
     public class ExplorationMainConsole : BorderedConsole
     {
-        public string NarrativeText { set; get; }
-        public List<MenuItem> MenuItems { set; get; }
+        public string NarrativeText;
+        public List<MenuItem> MenuItems;
 
         public ExplorationMainConsole(int width, int height, string narrativeText, List<MenuItem> menuItems) : 
             base(width, height)

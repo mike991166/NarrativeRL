@@ -9,11 +9,13 @@ namespace NarrativeRL.Core.UserInterface
     public class MenuItem
     {
         public string Text { get; set; }
-        public event EventHandler<EventArgs> Select;
+        public int Index { set; get; }
+        public event EventHandler<int> Select;
        
-        public MenuItem(string text, EventHandler<EventArgs> onSelect = null)
+        public MenuItem(string text, int index, EventHandler<int> onSelect = null)
         {
             this.Text = text;
+            this.Index = index;
 
             if (onSelect != null)
             {
@@ -35,7 +37,7 @@ namespace NarrativeRL.Core.UserInterface
         {
             if (this.Select != null)
             {
-                this.Select(sender, new EventArgs());
+                this.Select(sender, this.Index);
             }
         }
     }

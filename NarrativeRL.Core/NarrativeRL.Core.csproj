@@ -41,11 +41,13 @@
     <ApplicationIcon>Icon.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
-    <StartupObject>NarrativeRL.Core.Program</StartupObject>
+    <StartupObject>
+    </StartupObject>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Console\BorderedConsole.cs" />
     <Compile Include="Console\ConsoleConstants.cs" />
+    <Compile Include="Console\ExplorationAreaDetailsConsole.cs" />
     <Compile Include="Console\ExplorationHeaderConsole.cs" />
     <Compile Include="Console\ExplorationMainConsole.cs" />
     <Compile Include="Console\ExplorationScreen.cs" />
