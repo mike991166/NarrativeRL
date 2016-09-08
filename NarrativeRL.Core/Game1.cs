@@ -1,12 +1,19 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 using NarrativeRL.Core.Console;
 using NarrativeRL.Core.Data;
 using NarrativeRL.Core.Engine;
+using NarrativeRL.Core.UserInterface;
 
+using RogueSharp.Random;
+using SadConsole.Consoles;
 using SQLite;
 
 namespace NarrativeRL.Core
@@ -19,16 +26,22 @@ namespace NarrativeRL.Core
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
-        GameTime LastInputProcessedTime;
-        StringBuilder InputKeys;
+        public MenuConsole Menu;
+
+        public IRandom Random { get; private set; }
+
+        public List<Territory> TerritoryList;
+        public Territory SelectedTerritory;
+
+        public Stack<IGameState> GameStateStack;
+        public string CurrentInput;
+
+
 
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
-
-            LastInputProcessedTime = new GameTime();
-            InputKeys = new StringBuilder();
         }
 
         /// <summary>
@@ -50,15 +63,16 @@ namespace NarrativeRL.Core
                         SadConsole.Engine.UseMouse = true;
                         SadConsole.Engine.UseKeyboard = true;
 
-                        var sampleConsole = new SadConsole.Consoles.Console(80, 60);
+                        //var sampleConsole = new SadConsole.Consoles.Console(80, 60);
                         //sampleConsole.FillWithRandomGarbage();
 
-                        SadConsole.Engine.ConsoleRenderStack.Clear();
-                        SadConsole.Engine.ConsoleRenderStack.Add(sampleConsole);
-                        SadConsole.Engine.ActiveConsole = sampleConsole;
+                        //SadConsole.Engine.ConsoleRenderStack.Clear();
+                        //SadConsole.Engine.ConsoleRenderStack.Add(sampleConsole);
+                        //SadConsole.Engine.ActiveConsole = sampleConsole;
 
                     });
 
+            sadConsoleComponent.Initialize();
             Components.Add(sadConsoleComponent);
 
             // Makes the mouse visible on top of the game. Does not affect the SadConsole mouse behavior.
@@ -72,9 +86,24 @@ namespace NarrativeRL.Core
 
             #endregion
 
-            base.Initialize();
 
-            GameWorld.Start();
+            IGameState mainMenuState = new GameStateMainMenu();
+            CurrentInput = null;
+
+            // initialize GameState stack
+            GameStateStack = new Stack<IGameState>();
+
+            // Establish the seed for the random number generator from the current time
+            int seed = (int)DateTime.UtcNow.Ticks;
+            Random = new DotNetRandom(seed);
+
+            // initialize data
+            InitializeData();
+
+            // show main menu                       
+            GameStateStack.Push(mainMenuState);
+
+            //base.Initialize();
         }
 
         /// <summary>
@@ -109,24 +138,30 @@ namespace NarrativeRL.Core
                 Exit();
 
             // TODO: Add your update logic here
+            this.CurrentInput = InputUtil.ReadLineFromKeyboard();
 
+            // send command to processor
+            // make this a function with proper error checks later
+            IGameState currentGameState = this.GameStateStack.Peek();
 
-            // Process Received Input, waiting on Enter key
-            SadConsole.Input.KeyboardInfo keyInfo = SadConsole.Engine.Keyboard;
-
-            if (keyInfo.KeysReleased.Count > 0)
+            if (!String.IsNullOrWhiteSpace(this.CurrentInput))
             {
-                if (keyInfo.IsKeyReleased(Keys.Enter))
+                currentGameState = currentGameState.HandleInput(this, this.CurrentInput);
+
+                // current state is exiting (we'll see how this works)
+                if (currentGameState == null)
                 {
-                    string enteredString = this.InputKeys.ToString();
-                    this.InputKeys.Clear();
+                    currentGameState = this.GameStateStack.Pop(); // get next game state
                 }
-                else
+                else if (currentGameState != this.GameStateStack.Peek())
                 {
-                    this.InputKeys.Append(keyInfo.KeysReleased[0].Character);
+                    this.GameStateStack.Push(currentGameState);
                 }
+
             }
-           
+
+            currentGameState.Update(this);
+
             base.Update(gameTime);
         }
 
@@ -141,6 +176,12 @@ namespace NarrativeRL.Core
             // TODO: Add your drawing code here
 
             base.Draw(gameTime);
+        }
+        
+        private void InitializeData()
+        {
+            var db = new SQLiteConnection(@".\Database\nrl_db.sqlite");
+            TerritoryFactory.Initialize(db);
         }
     }
 }

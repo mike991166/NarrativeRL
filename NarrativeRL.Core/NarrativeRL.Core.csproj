@@ -59,8 +59,12 @@
     <Compile Include="Data\Terrain.cs" />
     <Compile Include="Data\Territory.cs" />
     <Compile Include="Data\Zone.cs" />
+    <Compile Include="Engine\GameStateExitGame.cs" />
+    <Compile Include="Engine\GameStateExploration.cs" />
+    <Compile Include="Engine\GameStateMainMenu.cs" />
+    <Compile Include="Engine\GameStateTerritorySelect.cs" />
+    <Compile Include="Engine\InputUtil.cs" />
     <Compile Include="Engine\TerritoryFactory.cs" />
-    <Compile Include="GameWorld.cs" />
     <Compile Include="Engine\IGameState.cs" />
     <Compile Include="Game1.cs" />
     <Compile Include="Program.cs" />
