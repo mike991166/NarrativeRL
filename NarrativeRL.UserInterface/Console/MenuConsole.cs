@@ -2,13 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
-using Microsoft.Xna.Framework.Input;
-using SadConsole;
-using SadConsole.Input;
-using NarrativeRL.Core.UserInterface;
 
-namespace NarrativeRL.Core.Console
+using NarrativeRL.UserInterface.Helper;
+
+namespace NarrativeRL.UserInterface.Console
 {
     public class MenuConsole: SadConsole.Consoles.Console
     {

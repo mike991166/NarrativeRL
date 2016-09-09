@@ -2,19 +2,15 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using NarrativeRL.Core.Console;
-using NarrativeRL.Core.Data;
 using NarrativeRL.Core.Engine;
-using NarrativeRL.Core.UserInterface;
+using NarrativeRL.Data.DataTypes;
+using NarrativeRL.Data.Factory;
+using NarrativeRL.UserInterface.Console;
 
 using RogueSharp.Random;
-using SadConsole.Consoles;
-using SQLite;
+
+using System;
+using System.Collections.Generic;
 
 namespace NarrativeRL.Core
 {
@@ -54,38 +50,22 @@ namespace NarrativeRL.Core
         {
             // TODO: Add your initialization logic here
 
-            #region SadConsole
-
-            var sadConsoleComponent = new SadConsole.EngineGameComponent(this, graphics, "IBM.font", 
-                ConsoleConstants.TotalWidth, ConsoleConstants.TotalHeight, 
-                () =>
-                    {
-                        SadConsole.Engine.UseMouse = true;
-                        SadConsole.Engine.UseKeyboard = true;
-
-                        //var sampleConsole = new SadConsole.Consoles.Console(80, 60);
-                        //sampleConsole.FillWithRandomGarbage();
-
-                        //SadConsole.Engine.ConsoleRenderStack.Clear();
-                        //SadConsole.Engine.ConsoleRenderStack.Add(sampleConsole);
-                        //SadConsole.Engine.ActiveConsole = sampleConsole;
-
-                    });
-
-            sadConsoleComponent.Initialize();
-            Components.Add(sadConsoleComponent);
+            #region Console
+            
+            var consoleComponent = ConsoleUtil.InitializeConsoleComponent(this, graphics);
+            Components.Add(consoleComponent);
 
             // Makes the mouse visible on top of the game. Does not affect the SadConsole mouse behavior.
             IsMouseVisible = true;
 
             #endregion
 
-            #region SQLite
+            #region Data
 
-            var db = new SQLiteConnection(@".\Database\nrl_db.sqlite");
+            // initialize data factories
+            FactoryUtil.InitializeFactories();
 
             #endregion
-
 
             IGameState mainMenuState = new GameStateMainMenu();
             CurrentInput = null;
@@ -96,9 +76,6 @@ namespace NarrativeRL.Core
             // Establish the seed for the random number generator from the current time
             int seed = (int)DateTime.UtcNow.Ticks;
             Random = new DotNetRandom(seed);
-
-            // initialize data
-            InitializeData();
 
             // show main menu                       
             GameStateStack.Push(mainMenuState);
@@ -176,12 +153,6 @@ namespace NarrativeRL.Core
             // TODO: Add your drawing code here
 
             base.Draw(gameTime);
-        }
-        
-        private void InitializeData()
-        {
-            var db = new SQLiteConnection(@".\Database\nrl_db.sqlite");
-            TerritoryFactory.Initialize(db);
-        }
+        }       
     }
 }

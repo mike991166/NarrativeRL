@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using NarrativeRL.Core.Data;
+using NarrativeRL.Data.DataTypes;
 using RogueSharp.Random;
 using SQLite;
 
-namespace NarrativeRL.Core.Engine
+namespace NarrativeRL.Data.Factory
 {
     public static class TerritoryFactory
     {

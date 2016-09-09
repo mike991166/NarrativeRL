@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 using SQLite;
 
-namespace NarrativeRL.Core.Data
+namespace NarrativeRL.Data.DataTypes
 {
     [Table("ListTerrain")]
     public class Terrain : BaseList { }

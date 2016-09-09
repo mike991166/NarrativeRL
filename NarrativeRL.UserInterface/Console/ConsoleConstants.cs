@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace NarrativeRL.Core.Console
+﻿namespace NarrativeRL.UserInterface.Console
 {
-    static class ConsoleConstants
+    public static class ConsoleConstants
     {
         public const int TotalWidth = 80;
         public const int TotalHeight = 25;

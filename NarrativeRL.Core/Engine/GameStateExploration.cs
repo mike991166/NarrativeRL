@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-using NarrativeRL.Core.Console;
-
+﻿using NarrativeRL.Data.DataTypes;
+using NarrativeRL.UserInterface.Console;
+using System;
 
 namespace NarrativeRL.Core.Engine
 {
@@ -40,7 +35,8 @@ namespace NarrativeRL.Core.Engine
         public void ShowExplorationScreen(Game1 game)
         {
             ExplorationScreen ExploreScreen = new ExplorationScreen();
-            ExploreScreen.SetNext(game.SelectedTerritory, "test narrative", null);
+            ExploreScreen.HeaderConsole.HeaderText = String.Format("{0} {1}", game.SelectedTerritory.LocationPrefixType.Name, game.SelectedTerritory.ZoneType.Name);
+            ExploreScreen.SetNext(game.SelectedTerritory.TerrainType.Name, "test narrative", null);
 
             SadConsole.Engine.ConsoleRenderStack.Clear();
             SadConsole.Engine.ConsoleRenderStack.Add(ExploreScreen);

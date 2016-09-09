@@ -1,13 +1,10 @@
-﻿using System;
+﻿using NarrativeRL.Data.DataTypes;
+using NarrativeRL.Data.Factory;
+using NarrativeRL.UserInterface.Console;
+using NarrativeRL.UserInterface.Helper;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-using NarrativeRL.Core.Console;
-using NarrativeRL.Core.Engine;
-using NarrativeRL.Core.Data;
-using NarrativeRL.Core.UserInterface;
 
 namespace NarrativeRL.Core.Engine
 {

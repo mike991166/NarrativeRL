@@ -1,12 +1,6 @@
-﻿using System;
+﻿using NarrativeRL.UserInterface.Console;
+using NarrativeRL.UserInterface.Helper;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.Xna.Framework;
-
-using NarrativeRL.Core.Console;
-using NarrativeRL.Core.UserInterface;
 
 namespace NarrativeRL.Core.Engine
 {

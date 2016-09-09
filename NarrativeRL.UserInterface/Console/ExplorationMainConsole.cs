@@ -1,14 +1,8 @@
-﻿using System;
+﻿using SadConsole.Consoles;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using NarrativeRL.UserInterface.Helper;
 
-using SadConsole.Consoles;
-
-using NarrativeRL.Core.UserInterface;
-
-namespace NarrativeRL.Core.Console
+namespace NarrativeRL.UserInterface.Console
 {
     public class ExplorationMainConsole : BorderedConsole
     {

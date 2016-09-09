@@ -9,7 +9,7 @@ using SadConsole.Readers.REXPaint;
 using SadConsole.Consoles;
 
 
-namespace NarrativeRL.Core.Console
+namespace NarrativeRL.UserInterface.Console
 {
     public class SimpleInputConsole: SadConsole.Consoles.Console
     {
