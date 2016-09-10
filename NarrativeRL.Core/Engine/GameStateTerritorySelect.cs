@@ -1,5 +1,5 @@
 ﻿using NarrativeRL.Data.DataTypes;
-using NarrativeRL.Data.Factory;
+using NarrativeRL.Data.Builder;
 using NarrativeRL.UserInterface.Console;
 using NarrativeRL.UserInterface.Helper;
 using System;
@@ -54,7 +54,7 @@ namespace NarrativeRL.Core.Engine
             introduction = String.Empty;
 
             // get list of territories
-            game.TerritoryList = TerritoryFactory.GetTerritoryList(game.Random, 3, 9);
+            game.TerritoryList = TerritoryBuilder.GetTerritoryList(game.Random, 3, 9);
 
             // build territory menu items
             string territoryString;

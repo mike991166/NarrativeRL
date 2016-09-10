@@ -48,7 +48,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Console\BorderedConsole.cs" />
     <Compile Include="Console\ConsoleConstants.cs" />
     <Compile Include="Console\ConsoleUtil.cs" />
     <Compile Include="Console\ExplorationAreaDetailsConsole.cs" />

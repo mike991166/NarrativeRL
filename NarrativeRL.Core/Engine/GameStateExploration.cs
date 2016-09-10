@@ -36,7 +36,7 @@ namespace NarrativeRL.Core.Engine
         {
             ExplorationScreen ExploreScreen = new ExplorationScreen();
             ExploreScreen.HeaderConsole.HeaderText = String.Format("{0} {1}", game.SelectedTerritory.LocationPrefixType.Name, game.SelectedTerritory.ZoneType.Name);
-            ExploreScreen.SetNext(game.SelectedTerritory.TerrainType.Name, "test narrative", null);
+            ExploreScreen.SetNext(game.SelectedTerritory.TerrainType.Name, game.SelectedTerritory.ZoneType.Description, null);
 
             SadConsole.Engine.ConsoleRenderStack.Clear();
             SadConsole.Engine.ConsoleRenderStack.Add(ExploreScreen);

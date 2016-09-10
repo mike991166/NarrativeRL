@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework.Input;
 
 using NarrativeRL.Core.Engine;
 using NarrativeRL.Data.DataTypes;
-using NarrativeRL.Data.Factory;
+using NarrativeRL.Data.Builder;
 using NarrativeRL.UserInterface.Console;
 
 using RogueSharp.Random;
@@ -63,7 +63,7 @@ namespace NarrativeRL.Core
             #region Data
 
             // initialize data factories
-            FactoryUtil.InitializeFactories();
+            BuilderUtil.InitializeBuilders();
 
             #endregion
 

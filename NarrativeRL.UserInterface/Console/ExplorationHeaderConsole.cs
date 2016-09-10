@@ -2,7 +2,7 @@
 
 namespace NarrativeRL.UserInterface.Console
 {
-    public class ExplorationHeaderConsole: SadConsole.Consoles.Console
+    public class ExplorationHeaderConsole : SadConsole.Consoles.Console
     {
         public string HeaderText { set; get; }
 

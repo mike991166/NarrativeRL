@@ -6,15 +6,15 @@ using System.Threading.Tasks;
 
 using SQLite;
 
-namespace NarrativeRL.Data.Factory
+namespace NarrativeRL.Data.Builder
 {
-    public static class FactoryUtil
+    public static class BuilderUtil
     {
-        public static void InitializeFactories()
+        public static void InitializeBuilders()
         {
             var db = new SQLiteConnection(@".\Database\nrl_db.sqlite");
 
-            TerritoryFactory.Initialize(db);
+            TerritoryBuilder.Initialize(db);
         }
 
     }

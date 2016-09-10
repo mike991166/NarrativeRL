@@ -8,9 +8,9 @@ using NarrativeRL.Data.DataTypes;
 using RogueSharp.Random;
 using SQLite;
 
-namespace NarrativeRL.Data.Factory
+namespace NarrativeRL.Data.Builder
 {
-    public static class TerritoryFactory
+    public static class TerritoryBuilder
     {
         private static bool isInitialized;
 

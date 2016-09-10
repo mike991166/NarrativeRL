@@ -67,8 +67,8 @@
     <Compile Include="DataTypes\Terrain.cs" />
     <Compile Include="DataTypes\Territory.cs" />
     <Compile Include="DataTypes\Zone.cs" />
-    <Compile Include="Factory\FactoryUtil.cs" />
-    <Compile Include="Factory\TerritoryFactory.cs" />
+    <Compile Include="Builder\BuilderUtil.cs" />
+    <Compile Include="Builder\TerritoryBuilder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
