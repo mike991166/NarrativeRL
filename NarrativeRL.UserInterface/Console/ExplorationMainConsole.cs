@@ -14,13 +14,13 @@ namespace NarrativeRL.UserInterface.Console
         public ExplorationMainConsole(int width, int height, string narrativeText, List<MenuItem> menuItems) : 
             base(width, height)
         {
-            borderSurface = new TextSurface(width + 1, height + 1, base.textSurface.Font);
+            borderSurface = new TextSurface(width + 2, height + 1, base.textSurface.Font);
             var editor = new SurfaceEditor(borderSurface);
 
             SadConsole.Shapes.Line rightBorder, bottomBorder;
 
             bottomBorder = new SadConsole.Shapes.Line();
-            bottomBorder.StartingLocation = new Microsoft.Xna.Framework.Point(0, borderSurface.Height - 1);
+            bottomBorder.StartingLocation = new Microsoft.Xna.Framework.Point(-1, borderSurface.Height - 1);
             bottomBorder.EndingLocation = new Microsoft.Xna.Framework.Point(borderSurface.Width - 1, borderSurface.Height - 1);
             bottomBorder.CellAppearance.GlyphIndex = 196;
             bottomBorder.UseEndingCell = false;
