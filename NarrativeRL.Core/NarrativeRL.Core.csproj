@@ -83,8 +83,8 @@
       <HintPath>..\packages\RogueSharp.3.0.0\lib\portable-net40+sl50+win+wpa81+wp80\RogueSharp.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="SadConsole.Core.Windows, Version=4.2.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\SadConsole.Core.4.2.1\lib\net45\SadConsole.Core.Windows.dll</HintPath>
+    <Reference Include="SadConsole.Core.Windows, Version=5.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SadConsole.Core.5.0.1\lib\net45\SadConsole.Core.Windows.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
@@ -94,43 +94,31 @@
     <Content Include="CGA8x8thick.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Cheepicus_12x12.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    <Content Include="Cheepicus_12x12.png" />
     <Content Include="cp437_12x12.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="IBM8x16.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    <Content Include="IBM8x16.png" />
     <Content Include="Icon.ico" />
-    <Content Include="Yayo_c64.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    <Content Include="Yayo_c64.png" />
   </ItemGroup>
   <ItemGroup>
     <MonoGameContentReference Include="Content\Content.mgcb" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
-    <None Include="C64.font">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
+    <None Include="C64.font" />
     <None Include="CGA8x8thick.font">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Cheepicus12.font">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
+    <None Include="Cheepicus12.font" />
     <None Include="Content\Rexpaint\InputFrame.xp">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="cp437_12x12.font">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="IBM.font">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
+    <None Include="IBM.font" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

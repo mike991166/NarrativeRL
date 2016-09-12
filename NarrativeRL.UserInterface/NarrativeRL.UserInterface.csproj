@@ -34,8 +34,12 @@
       <HintPath>..\packages\MonoGame.Framework.WindowsDX.3.5.1.1679\lib\net40\MonoGame.Framework.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="SadConsole.Core.Windows, Version=4.2.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\SadConsole.Core.4.2.1\lib\net45\SadConsole.Core.Windows.dll</HintPath>
+    <Reference Include="SadConsole.Controls.Windows, Version=3.0.4.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SadConsole.Controls.3.0.4\lib\net45\SadConsole.Controls.Windows.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="SadConsole.Core.Windows, Version=5.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SadConsole.Core.5.0.1\lib\net45\SadConsole.Core.Windows.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
@@ -54,33 +58,27 @@
     <Compile Include="Console\ExplorationHeaderConsole.cs" />
     <Compile Include="Console\ExplorationMainConsole.cs" />
     <Compile Include="Console\ExplorationScreen.cs" />
+    <Compile Include="Console\GenericInputConsole.cs" />
     <Compile Include="Console\MenuConsole.cs" />
+    <Compile Include="Console\ScrollingConsole.cs" />
     <Compile Include="Console\SimpleInputConsole.cs" />
     <Compile Include="Helper\MenuItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="C64.font">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Cheepicus12.font">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
+    <None Include="C64.font" />
+    <None Include="Cheepicus12.font" />
     <None Include="IBM.font">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Cheepicus_12x12.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    <Content Include="Cheepicus_12x12.png" />
     <Content Include="IBM8x16.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Yayo_c64.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    <Content Include="Yayo_c64.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

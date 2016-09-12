@@ -1,10 +1,14 @@
-﻿using SadConsole.Consoles;
+﻿using SadConsole;
+using SadConsole.Consoles;
 using System.Collections.Generic;
 using NarrativeRL.UserInterface.Helper;
+using System;
+using Microsoft.Xna.Framework;
 
 namespace NarrativeRL.UserInterface.Console
 {
-    public class ExplorationMainConsole : SadConsole.Consoles.Console
+    //public class ExplorationMainConsole : SadConsole.Consoles.Console
+    public class ExplorationMainConsole : ScrollingConsole
     {
         TextSurface borderSurface;
 
@@ -12,24 +16,25 @@ namespace NarrativeRL.UserInterface.Console
         public List<MenuItem> MenuItems;
 
         public ExplorationMainConsole(int width, int height, string narrativeText, List<MenuItem> menuItems) : 
-            base(width, height)
+            base(width, height, 800)
         {
+            // add borders
             borderSurface = new TextSurface(width + 2, height + 1, base.textSurface.Font);
             var editor = new SurfaceEditor(borderSurface);
 
             SadConsole.Shapes.Line rightBorder, bottomBorder;
 
             bottomBorder = new SadConsole.Shapes.Line();
-            bottomBorder.StartingLocation = new Microsoft.Xna.Framework.Point(-1, borderSurface.Height - 1);
-            bottomBorder.EndingLocation = new Microsoft.Xna.Framework.Point(borderSurface.Width - 1, borderSurface.Height - 1);
+            bottomBorder.StartingLocation = new Point(-1, borderSurface.Height - 1);
+            bottomBorder.EndingLocation = new Point(borderSurface.Width - 1, borderSurface.Height - 1);
             bottomBorder.CellAppearance.GlyphIndex = 196;
             bottomBorder.UseEndingCell = false;
             bottomBorder.UseStartingCell = false;
             bottomBorder.Draw(editor);
 
             rightBorder = new SadConsole.Shapes.Line();
-            rightBorder.StartingLocation = new Microsoft.Xna.Framework.Point(borderSurface.Width - 1, 0);
-            rightBorder.EndingLocation = new Microsoft.Xna.Framework.Point(borderSurface.Width - 1, borderSurface.Height - 1);
+            rightBorder.StartingLocation = new Point(borderSurface.Width - 1, 0);
+            rightBorder.EndingLocation = new Point(borderSurface.Width - 1, borderSurface.Height - 1);
             rightBorder.CellAppearance.GlyphIndex = 179;
             rightBorder.UseEndingCell = true;
             rightBorder.EndingCellAppearance.GlyphIndex = 193;
@@ -37,6 +42,7 @@ namespace NarrativeRL.UserInterface.Console
             rightBorder.StartingCellAppearance.GlyphIndex = 194;
             rightBorder.Draw(editor);
 
+            // assign inputs
             this.NarrativeText = narrativeText;
             this.MenuItems = menuItems;
         }
@@ -44,10 +50,22 @@ namespace NarrativeRL.UserInterface.Console
         public override void Render()
         {
             base.Render();
-            Renderer.Render(borderSurface, this.Position - new Microsoft.Xna.Framework.Point(1, 1));
+            //Renderer.Render(borderSurface, this.Position - new Point(1, 1));
 
             Cursor consoleCursor = new Cursor(this);
             consoleCursor.Print(this.NarrativeText);
+
+            if (this.MenuItems != null)
+            {
+
+            }
+            else
+            {
+                ColoredString prompt = new ColoredString("< Press any key >".Align(System.Windows.HorizontalAlignment.Center, this.Width), 
+                    Color.LightBlue, Color.Black); 
+                consoleCursor.Down(2);
+                consoleCursor.Print(prompt);
+            }
         }
     }
 
