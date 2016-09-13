@@ -3,9 +3,7 @@
     public class GenericInputConsole : SadConsole.Consoles.Console
     {
         public GenericInputConsole(int width) : base(width, 2)
-        {
-            
-
+        {           
             SadConsole.Shapes.Line topBorder;
 
             topBorder = new SadConsole.Shapes.Line();
@@ -15,11 +13,6 @@
             topBorder.UseEndingCell = false;
             topBorder.UseStartingCell = false;
             topBorder.Draw(this);
-        }
-
-        public override void Render()
-        {
-            base.Render();
 
             // display input marker and move cursor to it.
             this.Print(0, 1, ">");

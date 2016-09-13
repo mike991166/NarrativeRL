@@ -9,23 +9,50 @@ namespace NarrativeRL.UserInterface.Console
 {
     public class MenuConsole: SadConsole.Consoles.Console
     {
-        private string Title;
-        private string Introduction;
-        private List<MenuItem> MenuItems;
+        private string _title;
+        public string Title
+        {
+            get { return _title; }
+            set
+            {
+                this._title = value;
+                this.RedrawConsole();
+            }
 
-        private StringBuilder InputKeys = new StringBuilder();
+        }
+
+        private string _introduction;
+        public  string Introduction
+        {
+            get { return _introduction; }
+            set
+            {
+                this._introduction = value;
+                this.RedrawConsole();
+            }
+        }
+
+        private List<MenuItem> _menuItems;
+        public List<MenuItem> MenuItems
+        {
+            get { return _menuItems; }
+            set
+            {
+                this._menuItems = value;
+                this.RedrawConsole();
+            }
+        }
 
         public MenuConsole(int width, int height, string title, string introduction, List<MenuItem> items) : base(width, height)
         {            
             this.Title = title;
             this.Introduction = introduction;
             this.MenuItems = items;            
-            this.InputKeys = new StringBuilder();
 
             this.CanUseKeyboard = true;
         }
         
-        public override void Render()
+        private void RedrawConsole()
         {
             if (!String.IsNullOrEmpty(this.Title))
             {
@@ -38,16 +65,17 @@ namespace NarrativeRL.UserInterface.Console
             }
 
             // display menu items
-            for (int i = 0; i < this.MenuItems.Count(); i++)
+            if (this.MenuItems != null)
             {
-                this.Print(0, 5 + i, (String.Format("[{0}] {1}", i, this.MenuItems[i].Text)).Align(System.Windows.HorizontalAlignment.Left, this.Width));               
+                for (int i = 0; i < this.MenuItems.Count(); i++)
+                {
+                    this.Print(0, 5 + i, (String.Format("[{0}] {1}", i, this.MenuItems[i].Text)).Align(System.Windows.HorizontalAlignment.Left, this.Width));
+                }
             }
 
             // display input marker and move cursor to it.
             this.Print(0, this.Height - 2, ">");
             this.VirtualCursor.Position = new Microsoft.Xna.Framework.Point(1, this.Height - 2);
-
-            base.Render();
         }
     }
 }

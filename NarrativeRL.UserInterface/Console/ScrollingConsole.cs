@@ -65,7 +65,7 @@ namespace NarrativeRL.UserInterface.Console
             // If we detect that this console has shifted the data up for any reason (like the virtual cursor reached the
             // bottom of the entire text surface, OR we reached the bottom of the render area, we need to adjust the 
             // scroll bar and follow the cursor
-            if (TimesShiftedUp != 0 || _virtualCursor.Position.Y == textSurface.RenderArea.Height + scrollingCounter)
+            if (TimesShiftedUp != 0 || _virtualCursor.Position.Y >= textSurface.RenderArea.Height + scrollingCounter)
             {
                 // Once the buffer has finally been filled enough to need scrolling, turn on the scroll bar
                 scrollBar.IsEnabled = true;

@@ -1,4 +1,5 @@
-﻿using SadConsole.Consoles;
+﻿using Microsoft.Xna.Framework;
+using SadConsole.Consoles;
 using System;
 
 namespace NarrativeRL.UserInterface.Console
@@ -7,7 +8,16 @@ namespace NarrativeRL.UserInterface.Console
     {
         TextSurface borderSurface;
 
-        public string TerrainType;
+        private string _terrainType;
+        public string TerrainType
+        {
+            get { return _terrainType; }
+            set
+            {
+                this._terrainType = value;
+                this.RedrawConsole();
+            }
+        }
 
         public ExplorationAreaDetailsConsole(int width, int height) : base(width, height) { }
 
@@ -15,28 +25,30 @@ namespace NarrativeRL.UserInterface.Console
         {
             this.TerrainType = terrainType;
 
-            borderSurface = new TextSurface(width + 1, height + 1, base.textSurface.Font);
+            borderSurface = new TextSurface(width + 1, height + 2, base.textSurface.Font);
             var editor = new SurfaceEditor(borderSurface);
 
             SadConsole.Shapes.Line bottomBorder;
 
             bottomBorder = new SadConsole.Shapes.Line();
-            bottomBorder.StartingLocation = new Microsoft.Xna.Framework.Point(0, borderSurface.Height - 1);
-            bottomBorder.EndingLocation = new Microsoft.Xna.Framework.Point(borderSurface.Width - 1, borderSurface.Height - 1);
+            bottomBorder.StartingLocation = new Point(0, borderSurface.Height - 1);
+            bottomBorder.EndingLocation = new Point(borderSurface.Width - 1, borderSurface.Height - 1);
             bottomBorder.CellAppearance.GlyphIndex = 196;
             bottomBorder.UseEndingCell = false;
             bottomBorder.UseStartingCell = false;
             bottomBorder.Draw(editor);
-
         }
 
         public override void Render()
         {
             base.Render();
             Renderer.Render(borderSurface, this.Position - new Microsoft.Xna.Framework.Point(1, 1));
+        }
 
-            Cursor consoleCursor = new Cursor(this);
-            consoleCursor.Print(String.Format("Terrain: {0}", this.TerrainType));
+        private void RedrawConsole()
+        {
+            this.VirtualCursor.Position = new Point(0, 0);
+            this.VirtualCursor.Print(String.Format("Terrain: {0}", this.TerrainType));
         }
     }
 }

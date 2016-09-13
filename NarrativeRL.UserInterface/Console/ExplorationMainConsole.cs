@@ -7,19 +7,29 @@ using Microsoft.Xna.Framework;
 
 namespace NarrativeRL.UserInterface.Console
 {
-    //public class ExplorationMainConsole : SadConsole.Consoles.Console
     public class ExplorationMainConsole : ScrollingConsole
     {
         TextSurface borderSurface;
 
-        public string NarrativeText;
+        private string _narrativeText;
+
+        public string NarrativeText
+        {
+            get { return this._narrativeText; }
+
+            set
+            {
+                this._narrativeText = value;
+                this.RedrawConsole();
+            }
+        }
         public List<MenuItem> MenuItems;
 
         public ExplorationMainConsole(int width, int height, string narrativeText, List<MenuItem> menuItems) : 
             base(width, height, 800)
         {
             // add borders
-            borderSurface = new TextSurface(width + 2, height + 1, base.textSurface.Font);
+            borderSurface = new TextSurface(width + 2, height + 2, base.textSurface.Font);
             var editor = new SurfaceEditor(borderSurface);
 
             SadConsole.Shapes.Line rightBorder, bottomBorder;
@@ -50,22 +60,31 @@ namespace NarrativeRL.UserInterface.Console
         public override void Render()
         {
             base.Render();
-            //Renderer.Render(borderSurface, this.Position - new Point(1, 1));
+            Renderer.Render(borderSurface, this.Position - new Point(1, 1));            
+        }
 
-            Cursor consoleCursor = new Cursor(this);
-            consoleCursor.Print(this.NarrativeText);
-
-            if (this.MenuItems != null)
+        private void RedrawConsole()
+        {
+            if (this.NarrativeText != null)
             {
+                this.VirtualCursor.Print(this.NarrativeText);
 
-            }
-            else
-            {
-                ColoredString prompt = new ColoredString("< Press any key >".Align(System.Windows.HorizontalAlignment.Center, this.Width), 
-                    Color.LightBlue, Color.Black); 
-                consoleCursor.Down(2);
-                consoleCursor.Print(prompt);
-            }
+                if (this.MenuItems != null)
+                {
+
+                }
+                else
+                {
+                    ColoredString prompt = new ColoredString(
+                        "< Press any key >".Align(System.Windows.HorizontalAlignment.Center, 
+                        this.Width),
+                        Color.LightBlue, 
+                        Color.Black);
+                    this.VirtualCursor.Down(2);
+                    this.VirtualCursor.CarriageReturn();
+                    this.VirtualCursor.Print(prompt);
+                }
+            }            
         }
     }
 

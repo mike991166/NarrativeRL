@@ -4,7 +4,16 @@ namespace NarrativeRL.UserInterface.Console
 {
     public class ExplorationHeaderConsole : SadConsole.Consoles.Console
     {
-        public string HeaderText { set; get; }
+        private string _headerText;
+        public string HeaderText
+        {
+            get { return _headerText; }
+            set
+            {
+                this._headerText = value;
+                this.RedrawConsole();
+            }            
+        }
 
         public ExplorationHeaderConsole(int width) : base(width, 2)
         {
@@ -21,11 +30,10 @@ namespace NarrativeRL.UserInterface.Console
         {
             this.HeaderText = text;            
         }
-
-        public override void Render()
+      
+        private void RedrawConsole()
         {
-            base.Render();
-            this.Print(0, 0, HeaderText.Align(System.Windows.HorizontalAlignment.Center, this.Width));            
+            this.Print(0, 0, HeaderText.Align(System.Windows.HorizontalAlignment.Center, this.Width));
         }
     }
 }
