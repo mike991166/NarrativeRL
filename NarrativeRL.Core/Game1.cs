@@ -1,11 +1,13 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-
 using NarrativeRL.Core.Engine;
+using NarrativeRL.Core.Engine.State;
+
 using NarrativeRL.Data.DataTypes;
 using NarrativeRL.Data.Builder;
 using NarrativeRL.UserInterface.Console;
+using NarrativeRL.UserInterface.Helper;
 
 using RogueSharp.Random;
 
@@ -24,15 +26,20 @@ namespace NarrativeRL.Core
 
         public MenuConsole Menu;
 
+        // Random Number Generator
         public IRandom Random { get; private set; }
 
+        // Territory
         public List<Territory> TerritoryList;
         public Territory SelectedTerritory;
 
+        // Game State
         public Stack<IGameState> GameStateStack;
+
+        // Inputs
+        public InputUtil.InputReader InputReaderDelegate;
         public string CurrentInput;
-
-
+        public Stack<MenuItem> MenuItemStack;
 
         public Game1()
         {
@@ -66,19 +73,22 @@ namespace NarrativeRL.Core
             BuilderUtil.InitializeBuilders();
 
             #endregion
-
+            
             IGameState mainMenuState = new GameStateMainMenu();
-            CurrentInput = null;
+
+            this.MenuItemStack = new Stack<MenuItem>();
+            this.CurrentInput = null;
 
             // initialize GameState stack
-            GameStateStack = new Stack<IGameState>();
+            this.GameStateStack = new Stack<IGameState>();
 
             // Establish the seed for the random number generator from the current time
             int seed = (int)DateTime.UtcNow.Ticks;
-            Random = new DotNetRandom(seed);
+            this.Random = new DotNetRandom(seed);
 
             // show main menu                       
-            GameStateStack.Push(mainMenuState);
+            this.GameStateStack.Push(mainMenuState);
+            this.InputReaderDelegate = GameStateStack.Peek().GetInputReader();
 
             //base.Initialize();
         }
@@ -105,7 +115,7 @@ namespace NarrativeRL.Core
         }
 
         /// <summary>
-        /// Allows the game to run logic such as updating the world,
+        /// Allows the game to run logic ++such as updating the world,
         /// checking for collisions, gathering input, and playing audio.
         /// </summary>
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
@@ -115,13 +125,13 @@ namespace NarrativeRL.Core
                 Exit();
 
             // TODO: Add your update logic here
-            this.CurrentInput = InputUtil.ReadLineFromKeyboard();
+            this.CurrentInput = this.InputReaderDelegate();
 
             // send command to processor
             // make this a function with proper error checks later
             IGameState currentGameState = this.GameStateStack.Peek();
 
-            if (!String.IsNullOrWhiteSpace(this.CurrentInput))
+            if (this.CurrentInput != null)
             {
                 currentGameState = currentGameState.HandleInput(this, this.CurrentInput);
 
@@ -135,6 +145,7 @@ namespace NarrativeRL.Core
                     this.GameStateStack.Push(currentGameState);
                 }
 
+                this.InputReaderDelegate = currentGameState.GetInputReader();
             }
 
             currentGameState.Update(this);

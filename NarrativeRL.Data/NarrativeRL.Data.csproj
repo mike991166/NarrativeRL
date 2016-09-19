@@ -62,8 +62,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Builder\NarrativeFactory.cs" />
     <Compile Include="DataTypes\BaseList.cs" />
+    <Compile Include="DataTypes\Narrative\INarrative.cs" />
     <Compile Include="DataTypes\LocationPrefix.cs" />
+    <Compile Include="DataTypes\Narrative\NarrativeLocationGeneral.cs" />
     <Compile Include="DataTypes\Terrain.cs" />
     <Compile Include="DataTypes\Territory.cs" />
     <Compile Include="DataTypes\Zone.cs" />

@@ -2,11 +2,12 @@
 using NarrativeRL.Data.Builder;
 using NarrativeRL.UserInterface.Console;
 using NarrativeRL.UserInterface.Helper;
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace NarrativeRL.Core.Engine
+namespace NarrativeRL.Core.Engine.State
 {
     public class GameStateTerritorySelect : IGameState
     {
@@ -26,7 +27,7 @@ namespace NarrativeRL.Core.Engine
                 default:
                     game.SelectedTerritory = game.TerritoryList.ElementAt(intValue - 1);
                     this.TerritorySelectDisplayed = false;
-                    ret = new GameStateExploration();
+                    ret = new GameStateTerritoryIntro();
                     break;
             }
 
@@ -42,6 +43,10 @@ namespace NarrativeRL.Core.Engine
             }
         }
 
+        public InputUtil.InputReader GetInputReader()
+        {
+            return InputUtil.ReadLineFromKeyboard;
+        }
 
         public void ShowTerritorySelectionScreen(Game1 game)
         {
@@ -54,7 +59,7 @@ namespace NarrativeRL.Core.Engine
             introduction = String.Empty;
 
             // get list of territories
-            game.TerritoryList = TerritoryBuilder.GetTerritoryList(game.Random, 3, 9);
+            game.TerritoryList = TerritoryBuilder.GetRandomTerritoryList(game.Random, 3, 9);
 
             // build territory menu items
             string territoryString;

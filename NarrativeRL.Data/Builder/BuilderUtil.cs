@@ -14,6 +14,7 @@ namespace NarrativeRL.Data.Builder
         {
             var db = new SQLiteConnection(@".\Database\nrl_db.sqlite");
 
+            NarrativeFactory.Initialize(db);
             TerritoryBuilder.Initialize(db);
         }
 

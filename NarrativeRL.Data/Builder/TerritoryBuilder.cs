@@ -30,7 +30,7 @@ namespace NarrativeRL.Data.Builder
             isInitialized = true;
         }
 
-        public static Territory GetTerritory(IRandom rand)
+        public static Territory GetRandomTerritory(IRandom rand)
         {
             if (!isInitialized)
             {
@@ -46,7 +46,7 @@ namespace NarrativeRL.Data.Builder
             return t;
         }
 
-        public static List<Territory> GetTerritoryList(IRandom rand, int minCount, int maxCount)
+        public static List<Territory> GetRandomTerritoryList(IRandom rand, int minCount, int maxCount)
         {
             List<Territory> territoryList = null;
 
@@ -62,10 +62,7 @@ namespace NarrativeRL.Data.Builder
 
                 for (int i = 0; i < territoryCount; i++)
                 {
-                    t = new Territory();
-                    t.LocationPrefixType = locationPrefixes.ElementAt(rand.Next(locationPrefixes.Count - 1));
-                    t.ZoneType = zones.ElementAt(rand.Next(zones.Count - 1));
-                    t.TerrainType = terrains.ElementAt(rand.Next(terrains.Count - 1));
+                    t = GetRandomTerritory(rand);
                     territoryList.Add(t);
                 }
             }

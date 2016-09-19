@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace NarrativeRL.Core.Engine
+﻿namespace NarrativeRL.Core.Engine.State
 {
     public class GameStateExitGame : IGameState
     {
@@ -17,6 +11,11 @@ namespace NarrativeRL.Core.Engine
         public void Update(Game1 game)
         {
             game.Exit();
+        }
+
+        public InputUtil.InputReader GetInputReader()
+        {
+            return InputUtil.ReadAnyKeyFromKeyboard;
         }
     }
 }

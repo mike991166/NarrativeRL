@@ -2,7 +2,7 @@
 using NarrativeRL.UserInterface.Helper;
 using System.Collections.Generic;
 
-namespace NarrativeRL.Core.Engine
+namespace NarrativeRL.Core.Engine.State
 {
     public class GameStateMainMenu : IGameState
     {
@@ -40,6 +40,11 @@ namespace NarrativeRL.Core.Engine
                 this.DisplayMainMenu();
                 this.MainMenuDisplayed = true;
             }
+        }
+
+        public InputUtil.InputReader GetInputReader()
+        {
+            return InputUtil.ReadLineFromKeyboard;
         }
 
         private void DisplayMainMenu()

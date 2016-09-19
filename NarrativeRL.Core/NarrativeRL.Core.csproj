@@ -60,12 +60,13 @@
     </StartupObject>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Engine\GameStateExitGame.cs" />
-    <Compile Include="Engine\GameStateExploration.cs" />
-    <Compile Include="Engine\GameStateMainMenu.cs" />
-    <Compile Include="Engine\GameStateTerritorySelect.cs" />
+    <Compile Include="Engine\State\GameStateExitGame.cs" />
+    <Compile Include="Engine\State\GameStateExploration.cs" />
+    <Compile Include="Engine\State\GameStateMainMenu.cs" />
+    <Compile Include="Engine\State\GameStateTerritoryIntro.cs" />
+    <Compile Include="Engine\State\GameStateTerritorySelect.cs" />
     <Compile Include="Engine\InputUtil.cs" />
-    <Compile Include="Engine\IGameState.cs" />
+    <Compile Include="Engine\State\IGameState.cs" />
     <Compile Include="Game1.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -11,6 +11,8 @@ namespace NarrativeRL.Core.Engine
 {
     public static class InputUtil
     {
+        public delegate string InputReader();
+
         static StringBuilder InputKeys = new StringBuilder();
 
         /// <summary>
@@ -42,6 +44,32 @@ namespace NarrativeRL.Core.Engine
                 }
             }
            
+            return ret;
+        }
+
+        /// <summary>
+        /// Reads all keystrokes since last time called.  Used when ENTER is not needed or "Press Any Key"
+        /// type prompt is in use.
+        /// </summary>
+        /// <returns>String with characters since last time called.</returns>
+        public static string ReadAnyKeyFromKeyboard()
+        {
+            string ret = null;
+
+            KeyboardInfo keyInfo = SadConsole.Engine.Keyboard;
+
+            // loop through building string
+            for (int i = 0; i < keyInfo.KeysReleased.Count; i++)
+            {
+                InputKeys.Append(keyInfo.KeysReleased[i].Character);
+            }
+
+            if (InputKeys.Length > 0)
+            {
+                ret = InputKeys.ToString();
+                InputKeys.Clear();
+            }
+
             return ret;
         }
     }

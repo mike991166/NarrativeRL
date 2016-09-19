@@ -1,8 +1,9 @@
-﻿using NarrativeRL.Data.DataTypes;
+﻿using NarrativeRL.Data.Builder;
+using NarrativeRL.Data.DataTypes.Narrative;
 using NarrativeRL.UserInterface.Console;
 using System;
 
-namespace NarrativeRL.Core.Engine
+namespace NarrativeRL.Core.Engine.State
 {
     public class GameStateExploration : IGameState
     {
@@ -32,11 +33,19 @@ namespace NarrativeRL.Core.Engine
             }
         }
 
+        public InputUtil.InputReader GetInputReader()
+        {
+            return InputUtil.ReadAnyKeyFromKeyboard;
+        }
+
         public void ShowExplorationScreen(Game1 game)
         {
+            // logic to get narratives, events, battle, etc. will be called from here.
+            INarrative narrative = NarrativeFactory.GetRandomNarrative(game.Random);
+
             ExplorationScreen ExploreScreen = new ExplorationScreen();
             ExploreScreen.HeaderConsole.HeaderText = String.Format("{0} {1}", game.SelectedTerritory.LocationPrefixType.Name, game.SelectedTerritory.ZoneType.Name);
-            ExploreScreen.SetNext(game.SelectedTerritory.TerrainType.Name, game.SelectedTerritory.ZoneType.Description, null);
+            ExploreScreen.SetNext(game.SelectedTerritory.TerrainType.Name, narrative.Narrative, null);
 
             SadConsole.Engine.ConsoleRenderStack.Clear();
             SadConsole.Engine.ConsoleRenderStack.Add(ExploreScreen);
