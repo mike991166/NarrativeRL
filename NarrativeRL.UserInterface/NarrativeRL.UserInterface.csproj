@@ -63,6 +63,7 @@
     <Compile Include="Console\ScrollingConsole.cs" />
     <Compile Include="Console\SimpleInputConsole.cs" />
     <Compile Include="Helper\MenuItem.cs" />
+    <Compile Include="KeyboardInputHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -80,6 +81,7 @@
     </Content>
     <Content Include="Yayo_c64.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

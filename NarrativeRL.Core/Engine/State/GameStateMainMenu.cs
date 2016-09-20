@@ -1,4 +1,5 @@
-﻿using NarrativeRL.UserInterface.Console;
+﻿using NarrativeRL.UserInterface;
+using NarrativeRL.UserInterface.Console;
 using NarrativeRL.UserInterface.Helper;
 using System.Collections.Generic;
 
@@ -42,9 +43,9 @@ namespace NarrativeRL.Core.Engine.State
             }
         }
 
-        public InputUtil.InputReader GetInputReader()
+        public KeyboardInputHandler.InputReader GetInputReader()
         {
-            return InputUtil.ReadLineFromKeyboard;
+            return KeyboardInputHandler.ReadLineFromKeyboard;
         }
 
         private void DisplayMainMenu()

@@ -1,4 +1,6 @@
-﻿namespace NarrativeRL.Core.Engine.State
+﻿using NarrativeRL.UserInterface;
+
+namespace NarrativeRL.Core.Engine.State
 {
     public class GameStateExitGame : IGameState
     {
@@ -13,9 +15,9 @@
             game.Exit();
         }
 
-        public InputUtil.InputReader GetInputReader()
+        public KeyboardInputHandler.InputReader GetInputReader()
         {
-            return InputUtil.ReadAnyKeyFromKeyboard;
+            return KeyboardInputHandler.ReadAnyKeyFromKeyboard;
         }
     }
 }

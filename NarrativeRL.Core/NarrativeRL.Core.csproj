@@ -65,7 +65,6 @@
     <Compile Include="Engine\State\GameStateMainMenu.cs" />
     <Compile Include="Engine\State\GameStateTerritoryIntro.cs" />
     <Compile Include="Engine\State\GameStateTerritorySelect.cs" />
-    <Compile Include="Engine\InputUtil.cs" />
     <Compile Include="Engine\State\IGameState.cs" />
     <Compile Include="Game1.cs" />
     <Compile Include="Program.cs" />
@@ -123,7 +122,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Database\" />
     <Folder Include="Fonts\" />
   </ItemGroup>
   <ItemGroup>

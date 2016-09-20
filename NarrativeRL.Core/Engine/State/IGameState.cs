@@ -1,4 +1,6 @@
-﻿namespace NarrativeRL.Core.Engine.State
+﻿using NarrativeRL.UserInterface;
+
+namespace NarrativeRL.Core.Engine.State
 {
     public interface IGameState
     {
@@ -6,6 +8,6 @@
 
         void Update(Game1 game);
 
-        InputUtil.InputReader GetInputReader();
+        KeyboardInputHandler.InputReader GetInputReader();
     }
 }

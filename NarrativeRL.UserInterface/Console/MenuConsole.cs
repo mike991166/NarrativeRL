@@ -51,7 +51,7 @@ namespace NarrativeRL.UserInterface.Console
 
             this.CanUseKeyboard = true;
         }
-        
+
         private void RedrawConsole()
         {
             if (!String.IsNullOrEmpty(this.Title))

@@ -1,4 +1,5 @@
-﻿using NarrativeRL.UserInterface.Console;
+﻿using NarrativeRL.UserInterface;
+using NarrativeRL.UserInterface.Console;
 using System;
 
 namespace NarrativeRL.Core.Engine.State
@@ -30,9 +31,9 @@ namespace NarrativeRL.Core.Engine.State
             }
         }
 
-        public InputUtil.InputReader GetInputReader()
+        public KeyboardInputHandler.InputReader GetInputReader()
         {
-            return InputUtil.ReadAnyKeyFromKeyboard;
+            return KeyboardInputHandler.ReadAnyKeyFromKeyboard;
         }
 
         public void ShowExplorationIntroScreen(Game1 game)

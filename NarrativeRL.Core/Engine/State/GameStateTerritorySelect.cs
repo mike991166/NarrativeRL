@@ -1,5 +1,6 @@
 ﻿using NarrativeRL.Data.DataTypes;
 using NarrativeRL.Data.Builder;
+using NarrativeRL.UserInterface;
 using NarrativeRL.UserInterface.Console;
 using NarrativeRL.UserInterface.Helper;
 
@@ -43,9 +44,9 @@ namespace NarrativeRL.Core.Engine.State
             }
         }
 
-        public InputUtil.InputReader GetInputReader()
+        public KeyboardInputHandler.InputReader GetInputReader()
         {
-            return InputUtil.ReadLineFromKeyboard;
+            return KeyboardInputHandler.ReadLineFromKeyboard;
         }
 
         public void ShowTerritorySelectionScreen(Game1 game)

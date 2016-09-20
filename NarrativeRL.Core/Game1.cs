@@ -1,11 +1,11 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using NarrativeRL.Core.Engine;
 using NarrativeRL.Core.Engine.State;
 
 using NarrativeRL.Data.DataTypes;
 using NarrativeRL.Data.Builder;
+using NarrativeRL.UserInterface;
 using NarrativeRL.UserInterface.Console;
 using NarrativeRL.UserInterface.Helper;
 
@@ -37,7 +37,7 @@ namespace NarrativeRL.Core
         public Stack<IGameState> GameStateStack;
 
         // Inputs
-        public InputUtil.InputReader InputReaderDelegate;
+        public KeyboardInputHandler.InputReader InputReaderDelegate;
         public string CurrentInput;
         public Stack<MenuItem> MenuItemStack;
 

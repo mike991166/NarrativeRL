@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using Microsoft.Xna.Framework.Input;
+using SadConsole.Input;
 using System.Text;
-using System.Threading.Tasks;
 
-using SadConsole.Input;  // someday remove if decoupling is a priority, but has some nice helpers
-using Microsoft.Xna.Framework.Input;
-
-namespace NarrativeRL.Core.Engine
+namespace NarrativeRL.UserInterface
 {
-    public static class InputUtil
+    public static class KeyboardInputHandler
     {
         public delegate string InputReader();
 
@@ -35,7 +30,7 @@ namespace NarrativeRL.Core.Engine
                 {
                     InputKeys.Append(keyInfo.KeysReleased[i].Character);
                 }
-                
+
                 // ENTER pressed, process recieved keys and clear the buffer
                 else
                 {
@@ -43,7 +38,7 @@ namespace NarrativeRL.Core.Engine
                     InputKeys.Clear();
                 }
             }
-           
+
             return ret;
         }
 
@@ -72,5 +67,6 @@ namespace NarrativeRL.Core.Engine
 
             return ret;
         }
+
     }
 }
