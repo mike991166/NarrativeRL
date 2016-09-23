@@ -42,7 +42,7 @@ namespace NarrativeRL.Core.Engine.State
         public void ShowExplorationScreen(Game1 game)
         {
             // logic to get narratives, events, battle, etc. will be called from here.
-            INarrative narrative = NarrativeFactory.GetRandomNarrative(game.Random);
+            INarrative narrative = NarrativeFactory.GetRandomNarrative(game.Random, game.SelectedTerritory);
 
             ExplorationScreen ExploreScreen = new ExplorationScreen();
             ExploreScreen.HeaderConsole.HeaderText = String.Format("{0} {1}", game.SelectedTerritory.LocationPrefixType.Name, game.SelectedTerritory.ZoneType.Name);

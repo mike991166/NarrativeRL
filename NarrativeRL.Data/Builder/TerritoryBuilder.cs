@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using NarrativeRL.Data.Database;
 using NarrativeRL.Data.DataTypes;
 using RogueSharp.Random;
 using SQLite;
@@ -18,11 +19,11 @@ namespace NarrativeRL.Data.Builder
         private static List<Zone> zones;
         private static List<Terrain> terrains;
 
-        public static void Initialize(SQLiteConnection db)
+        public static void Initialize()
         {
-            var locationPrefixQuery = db.Table<LocationPrefix>();
-            var zoneQuery = db.Table<Zone>();
-            var terrainQuery = db.Table<Terrain>();
+            var locationPrefixQuery = DatabaseHelper.GetInstance().Table<LocationPrefix>();
+            var zoneQuery = DatabaseHelper.GetInstance().Table<Zone>();
+            var terrainQuery = DatabaseHelper.GetInstance().Table<Terrain>();
 
             locationPrefixes = locationPrefixQuery.ToList();
             zones = zoneQuery.ToList();

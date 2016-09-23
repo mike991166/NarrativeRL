@@ -12,11 +12,7 @@ namespace NarrativeRL.Data.Builder
     {
         public static void InitializeBuilders()
         {
-            var db = new SQLiteConnection(@".\Database\nrl_db.sqlite");
-
-            NarrativeFactory.Initialize(db);
-            TerritoryBuilder.Initialize(db);
+            TerritoryBuilder.Initialize();
         }
-
     }
 }

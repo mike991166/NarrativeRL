@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using NarrativeRL.Core.Engine.State;
 
+using NarrativeRL.Data.Database;
 using NarrativeRL.Data.DataTypes;
 using NarrativeRL.Data.Builder;
 using NarrativeRL.UserInterface;
@@ -112,6 +113,7 @@ namespace NarrativeRL.Core
         protected override void UnloadContent()
         {
             // TODO: Unload any non ContentManager content here
+            DatabaseHelper.Close();
         }
 
         /// <summary>

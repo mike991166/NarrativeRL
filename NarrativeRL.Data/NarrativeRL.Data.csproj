@@ -63,10 +63,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Builder\NarrativeFactory.cs" />
+    <Compile Include="Database\DatabaseHelper.cs" />
     <Compile Include="DataTypes\BaseList.cs" />
     <Compile Include="DataTypes\Narrative\INarrative.cs" />
     <Compile Include="DataTypes\LocationPrefix.cs" />
     <Compile Include="DataTypes\Narrative\NarrativeLocationGeneral.cs" />
+    <Compile Include="DataTypes\Narrative\NarrativeTerrainSpecific.cs" />
+    <Compile Include="DataTypes\Narrative\NarrativeZoneSpecific.cs" />
     <Compile Include="DataTypes\Terrain.cs" />
     <Compile Include="DataTypes\Territory.cs" />
     <Compile Include="DataTypes\Zone.cs" />
