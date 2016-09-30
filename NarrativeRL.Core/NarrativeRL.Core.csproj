@@ -60,6 +60,7 @@
     </StartupObject>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Engine\State\GameStateDisplayNarrative.cs" />
     <Compile Include="Engine\State\GameStateExitGame.cs" />
     <Compile Include="Engine\State\GameStateExploration.cs" />
     <Compile Include="Engine\State\GameStateMainMenu.cs" />

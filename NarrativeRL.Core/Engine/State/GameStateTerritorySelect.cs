@@ -17,6 +17,7 @@ namespace NarrativeRL.Core.Engine.State
         public IGameState HandleInput(Game1 game, string input)
         {
             IGameState ret;
+
             int intValue = int.Parse(input);
 
             switch (intValue)

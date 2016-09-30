@@ -15,6 +15,28 @@ namespace NarrativeRL.UserInterface.Console
             }            
         }
 
+        private int _totalSteps;
+        public int TotalSteps
+        {
+            get { return _totalSteps; }
+            set
+            {
+                this._totalSteps = value;
+                this.RedrawConsole();
+            }
+        }
+
+        private int _currentStep;
+        public int CurrentStep
+        {
+            get { return _currentStep; }
+            set
+            {
+                this._currentStep = value;
+                this.RedrawConsole();
+            }
+        }
+
         public ExplorationHeaderConsole(int width) : base(width, 2)
         {
             SadConsole.Shapes.Line line = new SadConsole.Shapes.Line();
@@ -33,7 +55,18 @@ namespace NarrativeRL.UserInterface.Console
       
         private void RedrawConsole()
         {
-            this.Print(0, 0, HeaderText.Align(System.Windows.HorizontalAlignment.Center, this.Width));
+            string title;
+
+            if (TotalSteps > 0)
+            {
+                title = String.Format("{0} [{1}/{2}]", this.HeaderText, CurrentStep.ToString("D2"), TotalSteps.ToString("D2"));
+            }
+            else
+            {
+                title = this.HeaderText;
+            }
+
+            this.Print(0, 0, title.Align(System.Windows.HorizontalAlignment.Center, this.Width));
         }
     }
 }

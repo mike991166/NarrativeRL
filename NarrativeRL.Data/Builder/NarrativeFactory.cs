@@ -11,21 +11,27 @@ namespace NarrativeRL.Data.Builder
     {
         private static List<NarrativeLocationGeneral> _narrativesLocationGeneral;
 
+        private static List<NarrativeType> _narrativeTypes = null;
+
         public static INarrative GetRandomNarrative(IRandom rand, Territory territory)
         {
             INarrative n;
+            int narrativeTypeId;
             int selector = rand.Next(0, 2);
 
             switch (selector)
             {
                 case 0:
-                    n = GetRandomNarrativeLocationGeneral(rand);
+                    narrativeTypeId = GetNarrativeTypeId("General");
+                    n = GetNarrative(rand, narrativeTypeId);
                     break;
                 case 1:
-                    n = GetRandomNarrativeTerrainSpecific(rand, territory.TerrainType);
+                    narrativeTypeId = GetNarrativeTypeId("Terrain");
+                    n = GetNarrative(rand, narrativeTypeId, territory.TerrainType.Id);
                     break;
                 case 2:
-                    n = GetRandomNarrativeZoneSpecific(rand, territory.ZoneType);
+                    narrativeTypeId = GetNarrativeTypeId("Zone");
+                    n = GetNarrative(rand, narrativeTypeId, territory.ZoneType.Id);
                     break;
                 default:
                     n = null;
@@ -34,6 +40,9 @@ namespace NarrativeRL.Data.Builder
             
             return n;
         }
+
+
+        #region LEGACY DATA STRUCTURE
 
         public static INarrative GetRandomNarrativeLocationGeneral(IRandom rand)
         {
@@ -78,6 +87,40 @@ namespace NarrativeRL.Data.Builder
             INarrative n = result.ElementAt(rand.Next(result.Count - 1));
 
             return n;
+        }
+
+        #endregion
+
+        public static INarrative GetNarrative(IRandom rand, int NarrativeTypeId, int ObjectId = 0)
+        {
+            string query = "SELECT [ListNarratives].[Id], " +
+                                  "[ListNarratives].[Narrative] " +
+                             "FROM [ListNarratives] " +
+                       "INNER JOIN [RelObjectToNarrative] " +
+                               "ON [ListNarratives].[Id] = [RelObjectToNarrative].[NarrativeId] " +
+                            "WHERE [RelObjectToNarrative].[NarrativeTypeId] = ? " +
+                              "AND [RelObjectToNarrative].[ObjectId] = ?";
+
+            var result = DatabaseHelper.GetInstance().Query<NarrativeTerrainSpecific>(query, NarrativeTypeId, ObjectId);
+
+            INarrative n = result.ElementAt(rand.Next(result.Count - 1));
+
+            return n;
+        }
+
+        private static int GetNarrativeTypeId(string narrativeType)
+        {
+            int narrativeTypeId;
+
+            if (_narrativeTypes == null)
+            {
+                _narrativeTypes = DatabaseHelper.GetInstance().Table<NarrativeType>().ToList();
+            }
+
+            var narrativeTypeObj = _narrativeTypes.Where(x => x.Type.Equals(narrativeType));
+            narrativeTypeId = narrativeTypeObj.Single().Id;
+
+            return narrativeTypeId;
         }
     }
 }

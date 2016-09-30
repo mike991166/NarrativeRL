@@ -68,5 +68,13 @@ namespace NarrativeRL.UserInterface
             return ret;
         }
 
+        /// <summary>
+        /// Returns a dummy string for states that do not actually require an input.
+        /// </summary>
+        /// <returns>Dummy string.</returns>
+        public static string GenerateKey()
+        {
+            return "foo";
+        }
     }
 }

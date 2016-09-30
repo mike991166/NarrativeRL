@@ -40,6 +40,9 @@ namespace NarrativeRL.Data.Builder
 
             Territory t = new Territory();
 
+            t.TotalSteps = rand.Next(10, 99);
+            t.CurrentStep = 0;
+
             t.LocationPrefixType = locationPrefixes.ElementAt(rand.Next(locationPrefixes.Count - 1));
             t.ZoneType = zones.ElementAt(rand.Next(zones.Count - 1));
             t.TerrainType = terrains.ElementAt(rand.Next(terrains.Count - 1));

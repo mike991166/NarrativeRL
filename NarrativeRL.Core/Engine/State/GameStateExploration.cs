@@ -2,6 +2,7 @@
 using NarrativeRL.Data.DataTypes.Narrative;
 using NarrativeRL.UserInterface;
 using NarrativeRL.UserInterface.Console;
+using RogueSharp.Random;
 using System;
 
 namespace NarrativeRL.Core.Engine.State
@@ -12,45 +13,42 @@ namespace NarrativeRL.Core.Engine.State
 
         public IGameState HandleInput(Game1 game, string input)
         {
-            IGameState ret;
+            IGameState ret = null;
 
-            switch (input)
+            if (game.SelectedTerritory.CurrentStep == game.SelectedTerritory.TotalSteps)
             {
-                default:
-                    ret = this;
-                    this.ExplorationScreenDisplayed = false;
-                    break;
+                ret = new GameStateTerritorySelect(); // change this to a Level End state, give experience, story, boss fight, etc...
+            }
+            else
+            {
+                // RNG decides next event type, simple for now
+                int nextEventSelector = game.Random.Next(1, 1);
+
+                switch (nextEventSelector)
+                {
+                    case 1:
+                        ret = new GameStateDisplayNarrative();
+                        break;
+                    default:
+                        ret = null;
+                        break;
+                }
+
+                // increment steps
+                game.SelectedTerritory.CurrentStep += 1;
             }
 
             return ret;
         }
 
         public void Update(Game1 game)
-        {
-            if (!ExplorationScreenDisplayed)
-            {
-                this.ShowExplorationScreen(game);
-                this.ExplorationScreenDisplayed = true;
-            }
+        {                     
+            // null
         }
 
         public KeyboardInputHandler.InputReader GetInputReader()
         {
-            return KeyboardInputHandler.ReadAnyKeyFromKeyboard;
-        }
-
-        public void ShowExplorationScreen(Game1 game)
-        {
-            // logic to get narratives, events, battle, etc. will be called from here.
-            INarrative narrative = NarrativeFactory.GetRandomNarrative(game.Random, game.SelectedTerritory);
-
-            ExplorationScreen ExploreScreen = new ExplorationScreen();
-            ExploreScreen.HeaderConsole.HeaderText = String.Format("{0} {1}", game.SelectedTerritory.LocationPrefixType.Name, game.SelectedTerritory.ZoneType.Name);
-            ExploreScreen.SetNext(game.SelectedTerritory.TerrainType.Name, narrative.Narrative, null);
-
-            SadConsole.Engine.ConsoleRenderStack.Clear();
-            SadConsole.Engine.ConsoleRenderStack.Add(ExploreScreen);
-        }
-
+            return KeyboardInputHandler.GenerateKey;
+        }               
     }
 }
